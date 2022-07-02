@@ -44,7 +44,6 @@
         >
           <li
             v-for="(option, index) in options"
-            :tabindex="index"
             :key="option.id"
             :id="`option-${option.id}`"
             role="option"
@@ -106,7 +105,7 @@ export default {
       );
     },
     activeDescendant() {
-      return this.activeOptionIndex !== -1 ? `option-${this.activeOptionIndex}`: '';
+      return this.activeOptionIndex !== -1 ? `option-${this.activeOptionIndex}`: 0;
     },
   },
 
@@ -125,7 +124,7 @@ export default {
     async showOptions() {
       this.optionsVisible = true;
       await this.$nextTick();
-      this.$refs.listboxOption[0].focus();
+      this.$refs.optionsMenu.focus();
       this.chosenOptionIndex = 0;
     },
     hideOptions() {
