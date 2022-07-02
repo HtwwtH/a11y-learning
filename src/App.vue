@@ -1,26 +1,61 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <form-select
+    :chosen-option="chosenOption"
+    label="Занятие на сегодня"
+    placeholder="Ничего не выбрано"
+    :options="options"
+    @set-value="setValue"
+  />
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import FormSelect from './components/FormSelect.vue'
 
 export default {
   name: 'App',
+
   components: {
-    HelloWorld
+    FormSelect
+  },
+
+  data() {
+    return {
+        chosenOption: null,
+        options: [
+        {
+          id: 0,
+          value: 'Читать твиттер',
+        },
+        {
+          id: 1,
+          value: 'Плакать',
+        },
+        {
+          id: 2,
+          value: 'Самообучение',
+        },
+        {
+          id: 3,
+          value: 'Созерцание природы',
+        },
+      ] 
+    }
+  },
+
+  methods: {
+    setValue(id) {
+      this.chosenOption = this.options[id];
+    }
   }
 }
 </script>
 
-<style>
+<style lang="scss">
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
+  font-family: 'Inter', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
+  color: $black;
   margin-top: 60px;
 }
 </style>
