@@ -39,7 +39,7 @@
           tabindex="-1"
           @keyup.up.prevent="selectPrevOption"
           @keyup.down.prevent="selectNextOption"
-          @keydown.enter.prevent="setValue"
+          @keydown.enter.space.prevent="setValue"
           @keydown.esc.prevent="reset"
         >
           <li
@@ -47,7 +47,7 @@
             :key="option.id"
             :id="`option-${option.id}`"
             role="option"
-            :aria-selected="activeOptionIndex === index"
+            :aria-selected="chosenOptionIndex === index"
             :data-value="option.value"
             class="option"
             :class="chosenOptionIndex === index && 'option--active'"
@@ -105,7 +105,7 @@ export default {
       );
     },
     activeDescendant() {
-      return this.activeOptionIndex !== -1 ? `option-${this.activeOptionIndex}`: 0;
+      return this.chosenOptionIndex !== -1 ? `option-${this.chosenOptionIndex}`: 'option-0';
     },
   },
 
@@ -142,7 +142,6 @@ export default {
       else {
         this.chosenOptionIndex--;
       }
-      this.$refs.listboxOption[this.chosenOptionIndex].focus();
     },
     selectNextOption() {
       if (this.chosenOptionIndex === this.options.length - 1) {
@@ -151,7 +150,6 @@ export default {
       else {
         this.chosenOptionIndex++;
       }
-      this.$refs.listboxOption[this.chosenOptionIndex].focus();
     },
     setValue() {
       this.$emit("setValue", this.chosenOptionIndex);
